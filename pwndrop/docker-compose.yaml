@@ -1,0 +1,27 @@
+version: "3.3"
+
+services:
+  pwndrop:
+    image: lscr.io/linuxserver/pwndrop:latest
+    container_name: pwndrop
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - SECRET_PATH=/pwndrop #optional
+    volumes:
+      - /home/happi/pwntainer/pwndrop:/config
+    networks:
+      - portainer_default
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pwndrop.rule=Host(`pwndrop.happi.yt`)"
+      - "traefik.http.routers.pwndrop.entrypoints=websecure"
+      - "traefik.http.services.pwndrop.loadbalancer.server.port=8080"
+      - "traefik.http.routers.pwndrop.service=pwndrop"
+      - "traefik.http.routers.pwndrop.tls.certresolver=leresolver"
+
+networks:
+  portainer_default:
+    external: true
