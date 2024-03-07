@@ -5,18 +5,19 @@ services:
     image: php:8.2-apache
     container_name: server-php
     volumes:
-      - /home/happi/portainer/app/:/var/www/html
+      - /home/happi/portainer/php-server/app:/var/www/html
     networks:
       - portainer_default
     restart: always
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.server-php.rule=Host(`server-php.happi.yt`)"
-      - "traefik.http.routers.server-php.entrypoints=websecure"
-      - "traefik.http.services.server-php.loadbalancer.server.port=80"
-      - "traefik.http.routers.server-php.service=server-php"
-      - "traefik.http.routers.server-php.tls.certresolver=leresolver"
+      - "traefik.http.routers.redir.rule=Host(`redir.happi.yt`)"
+      - "traefik.http.routers.redir.entrypoints=websecure"
+      - "traefik.http.services.redir.loadbalancer.server.port=80"
+      - "traefik.http.routers.redir.service=redir"
+      - "traefik.http.routers.redir.tls.certresolver=leresolver"
 
 networks:
   portainer_default:
     external: true
+

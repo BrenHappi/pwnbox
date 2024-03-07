@@ -1,1 +1,1 @@
-<?php header('Location: http://google.com/', TRUE, 302); ?>
+<?php header('Location: https://google.com/', TRUE, 302); ?>
