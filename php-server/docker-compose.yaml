@@ -5,7 +5,7 @@ services:
     image: php:8.2-apache
     container_name: server-php
     volumes:
-      - $HOME/pwntainer/app/:/var/www/html
+      - /home/happi/portainer/app/:/var/www/html
     networks:
       - portainer_default
     restart: always

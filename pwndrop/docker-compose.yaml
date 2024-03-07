@@ -10,7 +10,7 @@ services:
       - TZ=Etc/UTC
       - SECRET_PATH=/pwndrop #optional
     volumes:
-      - /home/happi/pwntainer/pwndrop:/config
+      - /home/happi/portainer/pwndrop:/config
     networks:
       - portainer_default
     restart: always
