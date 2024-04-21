@@ -8,7 +8,7 @@
       "note": "Store and expose static content (.js, .html, etc) on the internet.",
       "categories": ["storage", "static"],
       "platform": "linux",
-      "logo": "https://github.com/kgretzky/pwndrop/blob/master/media/pwndrop-logo-512.png",
+      "logo": "https://raw.githubusercontent.com/kgretzky/pwndrop/master/media/pwndrop-logo-512.png",
       "repository": {
         "url": "https://github.com/BrenHappi/pwnbox",
         "stackfile": "services/pwndrop/docker-compose.yml"
