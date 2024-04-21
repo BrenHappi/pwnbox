@@ -26,8 +26,6 @@ services:
     container_name: portainer
     image: portainer/portainer-ce:latest
     command: -H unix:///var/run/docker.sock
-    env_file:
-      - .env
     restart: always
     networks:
       - frontend
@@ -36,11 +34,11 @@ services:
       - /usr/share/data/portainer:/data
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${TRAEFIK_NAME}.service=${TRAEFIK_NAME}"
-      - "traefik.http.routers.${TRAEFIK_NAME}.entrypoints=https"
-      - "traefik.http.routers.${TRAEFIK_NAME}.tls.certresolver=letsencrypt-http"
-      - "traefik.http.routers.${TRAEFIK_NAME}.rule=Host(`${TRAEFIK_HOST}`)"
-      - "traefik.http.services.${TRAEFIK_NAME}.loadbalancer.server.port=${TRAEFIK_PORT}"
+      - "traefik.http.routers.portainer.service=portainer"
+      - "traefik.http.routers.portainer.entrypoints=https"
+      - "traefik.http.routers.portainer.tls.certresolver=letsencrypt-http"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.example.com`)"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
 
 networks:
   frontend:
