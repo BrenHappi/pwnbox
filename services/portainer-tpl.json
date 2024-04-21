@@ -33,7 +33,7 @@
       "note": "Host XSS payload and collect results from XSS triggers.",
       "categories": ["xss", "pwn"],
       "platform": "linux",
-      "logo": "https://raw.githubusercontent.com/trufflesecurity/xsshunter/main/front-end/public/svgs/brands/gripfire.svg",
+      "logo": "https://seeklogo.com/images/T/truffle-logo-357454171D-seeklogo.com.png",
       "repository": {
         "url": "https://github.com/BrenHappi/pwnbox",
         "stackfile": "services/xsshunter/docker-compose.yml"
