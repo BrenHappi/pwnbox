@@ -8,8 +8,15 @@
   [entryPoints.https]
     address=":443"
 
+[providers]
+  [providers.file]
+    filename = "/etc/traefik/config/traefik.toml"
+    watch = true
+  [providers.docker]
+    endpoint = "unix:///var/run/docker.sock"
+
 [log]
-  level = "WARN"
+  level = "DEBUG"
 
 [accessLog]
   filePath = "/var/log/traefik/traefik.json"
@@ -17,7 +24,7 @@
 
 [api]
   insecure = true
-  dashboard = false
+  dashboard = true
 
 [certificatesResolvers]
   [certificatesResolvers.letsencrypt-http]
