@@ -30,7 +30,7 @@ services:
       - .env
     restart: always
     networks:
-      - fontend
+      - frontend
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/share/data/portainer:/data
@@ -44,3 +44,4 @@ services:
 
 networks:
   frontend:
+    name: frontend
