@@ -1,4 +1,4 @@
-version: "3"
+---
 
 services:
   pwndrop:
@@ -9,9 +9,6 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
       - SECRET_PATH=/pwndrop #optional
-      - TRAEFIK_HOST=pwndrop.happi.yt
-      - TRAEFIK_PORT=8080
-      - TRAEFIK_NAME=portainer
     volumes:
       - /usr/share/data/pwndrop:/config
     restart: unless-stopped
