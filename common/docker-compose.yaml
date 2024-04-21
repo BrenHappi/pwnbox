@@ -5,10 +5,12 @@ services:
     container_name: traefik
     image: "traefik:latest"
     restart: always
+    networks:
+      - fontend
     ports:
       - "80:80"
       - "443:443"
-      - "8080:8080"
+      # - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - /usr/share/data/traefik/data:/data:rw
@@ -27,6 +29,8 @@ services:
     env_file:
       - .env
     restart: always
+    networks:
+      - fontend
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/share/data/portainer:/data
@@ -37,3 +41,6 @@ services:
       - "traefik.http.routers.${TRAEFIK_NAME}.tls.certresolver=letsencrypt-http"
       - "traefik.http.routers.${TRAEFIK_NAME}.rule=Host(`${TRAEFIK_HOST}`)"
       - "traefik.http.services.${TRAEFIK_NAME}.loadbalancer.server.port=${TRAEFIK_PORT}"
+
+networks:
+  frontend:

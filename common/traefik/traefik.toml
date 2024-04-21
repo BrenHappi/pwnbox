@@ -24,7 +24,7 @@
 
 [api]
   insecure = true
-  dashboard = true
+  dashboard = false
 
 [certificatesResolvers]
   [certificatesResolvers.letsencrypt-http]

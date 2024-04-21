@@ -9,6 +9,8 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
       - SECRET_PATH=/pwndrop #optional
+    networks:
+      - frontend
     volumes:
       - /usr/share/data/pwndrop:/config
     restart: unless-stopped
@@ -19,3 +21,6 @@ services:
       - "traefik.http.routers.${TRAEFIK_NAME}.tls.certresolver=letsencrypt-http"
       - "traefik.http.routers.${TRAEFIK_NAME}.rule=Host(`${TRAEFIK_HOST}`)"
       - "traefik.http.services.${TRAEFIK_NAME}.loadbalancer.server.port=${TRAEFIK_PORT}"
+
+networks:
+  frontend:
