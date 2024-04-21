@@ -23,9 +23,9 @@ services:
     image: portainer/portainer-ce:latest
     command: -H unix:///var/run/docker.sock
     environment:
-      - TRAEFIK_HOST: portainer.happi.yt
-      - TRAEFIK_PORT: 9000
-      - TRAEFIK_NAME: portainer
+      - TRAEFIK_HOST=portainer.happi.yt
+      - TRAEFIK_PORT=9000
+      - TRAEFIK_NAME=portainer
     restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
