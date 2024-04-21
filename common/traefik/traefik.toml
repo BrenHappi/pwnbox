@@ -1,0 +1,30 @@
+[global]
+  checkNewVersion = true
+  sendAnonymousUsage = false
+
+[entryPoints]
+  [entryPoints.http]
+    address=":80"
+  [entryPoints.https]
+    address=":443"
+
+[log]
+  level = "WARN"
+
+[accessLog]
+  filePath = "/var/log/traefik/traefik.json"
+  format = "json"
+
+[api]
+  insecure = true
+  dashboard = false
+
+[certificatesResolvers]
+  [certificatesResolvers.letsencrypt-http]
+    [certificatesResolvers.letsencrypt-http.acme]
+      email = "bren.happi.me@gmail.com"
+      storage = "/data/acme-http.json"
+      caServer = "https://acme-v02.api.letsencrypt.org/directory"
+  
+      [certificatesResolvers.letsencrypt-http.acme.httpChallenge]
+        entryPoint = "http"

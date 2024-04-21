@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  pwndrop:
+    image: lscr.io/linuxserver/pwndrop:latest
+    container_name: pwndrop
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - SECRET_PATH=/pwndrop #optional
+      - TRAEFIK_HOST: pwndrop.happi.yt
+      - TRAEFIK_PORT: 8080
+      - TRAEFIK_NAME: portainer
+    volumes:
+      - /usr/share/data/pwndrop:/config
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${TRAEFIK_NAME}.service=${TRAEFIK_NAME}"
+      - "traefik.http.routers.${TRAEFIK_NAME}.entrypoints=https"
+      - "traefik.http.routers.${TRAEFIK_NAME}.tls.certresolver=letsencrypt-http"
+      - "traefik.http.routers.${TRAEFIK_NAME}.rule=Host(`${TRAEFIK_HOST}`)"
+      - "traefik.http.services.${TRAEFIK_NAME}.loadbalancer.server.port=${TRAEFIK_PORT}"

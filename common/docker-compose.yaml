@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  traefik:
+    container_name: traefik
+    image: "traefik:latest"
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - /usr/share/data/traefik/data:/data:rw
+      - /usr/share/data/traefik/logs:/var/log/traefik
+    labels:
+      - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
+      - "traefik.http.routers.http-catchall.entrypoints=http"
+      - "traefik.http.routers.http-catchall.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce:latest
+    command: -H unix:///var/run/docker.sock
+    environment:
+      - TRAEFIK_HOST: portainer.happi.yt
+      - TRAEFIK_PORT: 9000
+      - TRAEFIK_NAME: portainer
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/share/data/portainer:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${TRAEFIK_NAME}.service=${TRAEFIK_NAME}"
+      - "traefik.http.routers.${TRAEFIK_NAME}.entrypoints=https"
+      - "traefik.http.routers.${TRAEFIK_NAME}.tls.certresolver=letsencrypt-http"
+      - "traefik.http.routers.${TRAEFIK_NAME}.rule=Host(`${TRAEFIK_HOST}`)"
+      - "traefik.http.services.${TRAEFIK_NAME}.loadbalancer.server.port=${TRAEFIK_PORT}"
