@@ -6,7 +6,7 @@ services:
     image: "traefik:latest"
     restart: always
     networks:
-      - fontend
+      - frontend
     ports:
       - "80:80"
       - "443:443"
