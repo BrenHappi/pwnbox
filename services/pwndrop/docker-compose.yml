@@ -9,9 +9,6 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
       - SECRET_PATH=${SECRET_PATH}
-      - TRAEFIK_HOST=${TRAEFIK_HOST}
-      - TRAEFIK_PORT=8080
-      - TRAEFIK_NAME=pwndrop
     networks:
       - frontend
     volumes:
@@ -19,11 +16,11 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.$${TRAEFIK_NAME}.service=$${TRAEFIK_NAME}"
-      - "traefik.http.routers.$${TRAEFIK_NAME}.entrypoints=https"
-      - "traefik.http.routers.$${TRAEFIK_NAME}.tls.certresolver=letsencrypt-http"
-      - "traefik.http.routers.$${TRAEFIK_NAME}.rule=Host(`${TRAEFIK_HOST}`)"
-      - "traefik.http.services.$${TRAEFIK_NAME}.loadbalancer.server.port=$${TRAEFIK_PORT}"
+      - "traefik.http.routers.s_pwndrop.service=s_pwndrop"
+      - "traefik.http.routers.s_pwndrop.entrypoints=https"
+      - "traefik.http.routers.s_pwndrop.tls.certresolver=letsencrypt-http"
+      - "traefik.http.routers.s_pwndrop.rule=Host(`${TRAEFIK_HOST}`)"
+      - "traefik.http.services.s_pwndrop.loadbalancer.server.port=8080"
 
 networks:
   frontend:
