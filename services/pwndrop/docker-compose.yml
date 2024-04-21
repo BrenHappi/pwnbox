@@ -9,6 +9,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
       - SECRET_PATH=${SECRET_PATH}
+      - TRAEFIK_HOST=${TRAEFIK_HOST}
     networks:
       - frontend
     volumes:
