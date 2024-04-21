@@ -34,11 +34,11 @@ services:
         condition: service_healthy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.${TRAEFIK_NAME}.service=${TRAEFIK_NAME}"
-      - "traefik.http.routers.${TRAEFIK_NAME}.entrypoints=https"
-      - "traefik.http.routers.${TRAEFIK_NAME}.tls.certresolver=letsencrypt-http"
-      - "traefik.http.routers.${TRAEFIK_NAME}.rule=Host(`${TRAEFIK_HOST}`)"
-      - "traefik.http.services.${TRAEFIK_NAME}.loadbalancer.server.port=${TRAEFIK_PORT}"
+      - "traefik.http.routers.s_xsshunter.service=s_xsshunter"
+      - "traefik.http.routers.s_xsshunter.entrypoints=https"
+      - "traefik.http.routers.s_xsshunter.tls.certresolver=letsencrypt-http"
+      - "traefik.http.routers.s_xsshunter.rule=Host(`${XSS_HOSTNAME}`)"
+      - "traefik.http.services.s_xsshunter.loadbalancer.server.port=8080"
 
 networks:
   frontend:

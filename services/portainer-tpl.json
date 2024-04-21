@@ -18,11 +18,6 @@
           "name": "TRAEFIK_HOST",
           "label": "Traefik hostname.",
           "description": "Host to expose this service through Traefik reverse proxy."
-        },
-        {
-          "name": "SECRET_PATH",
-          "label": "Secret path.",
-          "description": "Secret path to access dashboard. Example: /pwndrop."
         }
       ]
     },
