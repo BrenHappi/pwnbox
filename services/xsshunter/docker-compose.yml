@@ -16,7 +16,7 @@ services:
     networks:
       - xsshunter
     volumes:
-      - ./postgres-db-data:/var/lib/postgresql/data/pgdata
+      - /usr/share/data/xsshunter/postgres-db-data:/var/lib/postgresql/data/pgdata
   xsshunterexpress-service:
     build: .
     container_name: xsshunterexpress-service
@@ -27,7 +27,7 @@ services:
       - frontend
       - xsshunter
     volumes:
-      - ./payload-fire-images:/app/payload-fire-images
+      - /usr/share/data/xsshunter/payload-fire-images:/app/payload-fire-images
       - ~/.config/gcloud/application_default_credentials.json:/gcloud.json
     depends_on:
       xsshunterexpress-db:
