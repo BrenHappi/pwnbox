@@ -1,0 +1,3 @@
+{$HOSTNAME} {$XSS_HOSTNAME} {
+	reverse_proxy xsshunterexpress-service:8080
+}

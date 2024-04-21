@@ -1,0 +1,45 @@
+services:
+  xsshunterexpress-db:
+    image: postgres
+    container_name: xsshunterexpress-db
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_HOST_AUTH_METHOD: trust
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER"]
+      interval: 3s
+      timeout: 5s
+      retries: 5
+    networks:
+      - xsshunter
+    volumes:
+      - ./postgres-db-data:/var/lib/postgresql/data/pgdata
+  xsshunterexpress-service:
+    build: .
+    container_name: xsshunterexpress-service
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      - frontend
+      - xsshunter
+    volumes:
+      - ./payload-fire-images:/app/payload-fire-images
+      - ~/.config/gcloud/application_default_credentials.json:/gcloud.json
+    depends_on:
+      xsshunterexpress-db:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${TRAEFIK_NAME}.service=${TRAEFIK_NAME}"
+      - "traefik.http.routers.${TRAEFIK_NAME}.entrypoints=https"
+      - "traefik.http.routers.${TRAEFIK_NAME}.tls.certresolver=letsencrypt-http"
+      - "traefik.http.routers.${TRAEFIK_NAME}.rule=Host(`${TRAEFIK_HOST}`)"
+      - "traefik.http.services.${TRAEFIK_NAME}.loadbalancer.server.port=${TRAEFIK_PORT}"
+
+networks:
+  frontend:
+    name: frontend

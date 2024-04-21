@@ -1,0 +1,21 @@
+FROM python:3.11-alpine
+RUN apk add --no-cache bash git wget openssh-client ca-certificates \
+    && rm -rf /var/cache/apk/* && \
+    update-ca-certificates
+RUN if [ $(uname -m) = "x86_64" ]; then \
+        wget https://github.com/trufflesecurity/trufflehog/releases/download/v3.63.8/trufflehog_3.63.8_linux_amd64.tar.gz -O /tmp/trufflehog.tar.gz \
+    ; elif [ $(uname -m) = "aarch64" ]; then \
+        wget https://github.com/trufflesecurity/trufflehog/releases/download/v3.63.8/trufflehog_3.63.8_linux_arm64.tar.gz -O /tmp/trufflehog.tar.gz \
+    ; else \
+        echo "Unsupported architecture" && exit 1 \
+    ; fi \
+    && cd /tmp \
+    && tar zxf trufflehog.tar.gz \
+    && mv trufflehog /usr/bin \
+    && rm trufflehog.tar.gz LICENSE README.md
+COPY ./requirements.txt /app/requirements.txt
+WORKDIR /app
+RUN chmod +x /usr/bin/trufflehog
+RUN pip install -r requirements.txt
+COPY trufflehog.py /app
+CMD ["gunicorn", "--bind", "0.0.0.0", "trufflehog:app" ]
