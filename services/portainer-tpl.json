@@ -35,14 +35,9 @@
       },
       "env": [
         {
-          "name": "TRAEFIK_HOST",
-          "label": "Traefik hostname.",
-          "description": "Host to expose this service through Traefik reverse proxy."
-        },
-        {
           "name": "XSS_HOSTNAME",
           "label": "Traefik hostname.",
-          "description": "Same as TRAEFIK_HOST."
+          "description": "Define hostname to be mapped via reverse proxy (Traefik)."
         },
         {
           "name": "PANEL_USERNAME",
