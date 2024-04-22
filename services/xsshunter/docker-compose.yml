@@ -23,9 +23,9 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-    environment:
-      - PANEL_USERNAME=${PANEL_USERNAME}
-      - PANEL_PASSWORD=${PANEL_PASSWORD}
+    # environment:
+    #   - PANEL_USERNAME=${PANEL_USERNAME}
+    #   - PANEL_PASSWORD=${PANEL_PASSWORD}
     networks:
       - frontend
       - xsshunter
