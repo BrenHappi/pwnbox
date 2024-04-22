@@ -26,6 +26,8 @@ services:
     environment:
       - PANEL_USERNAME=${PANEL_USERNAME}
       - PANEL_PASSWORD=${PANEL_PASSWORD}
+      - HOSTNAME=${XSS_HOSTNAME}
+      - XSS_HOSTNAME=${XSS_HOSTNAME}
     networks:
       - frontend
       - xsshunter
