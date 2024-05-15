@@ -2,7 +2,7 @@
 
 services:
   webserv:
-    image: php:8.2-apache
+    context: ./docker
     restart: unless-stopped
     volumes:
       - ./src:/var/www/html
