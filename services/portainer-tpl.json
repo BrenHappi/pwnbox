@@ -18,6 +18,11 @@
           "name": "TRAEFIK_HOST",
           "label": "Traefik hostname.",
           "description": "Host to expose this service through Traefik reverse proxy."
+        },
+        {
+          "name": "PATH",
+          "label": "Pwndrop secret path.",
+          "description": "Secret path to access pwndrop dashboard."
         }
       ]
     },
@@ -48,6 +53,26 @@
           "name": "PANEL_PASSWORD",
           "label": "Administrator password.",
           "description": "Password of administrator account."
+        }
+      ]
+    },
+    {
+      "type": 3,
+      "title": "webserv",
+      "description": "Temporary web server for pwn.",
+      "note": "Temporary web server for file hosting and pwn with php support.",
+      "categories": ["pwn"],
+      "platform": "linux",
+      "logo": "https://www.freepnglogos.com/uploads/php-logo-png/php-logo-png-transparent-images-download-clip-6.png",
+      "repository": {
+        "url": "https://github.com/BrenHappi/pwnbox",
+        "stackfile": "services/xsshunter/docker-compose.yml"
+      },
+      "env": [
+        {
+          "name": "TRAEFIK_HOST",
+          "label": "Traefik hostname.",
+          "description": "Define hostname to be mapped via reverse proxy (Traefik)."
         }
       ]
     }
