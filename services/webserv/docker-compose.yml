@@ -4,8 +4,7 @@ services:
   webserv:
     context: ./docker
     restart: unless-stopped
-    volumes:
-      - ./src:/var/www/html
+    networks: frontend
     labels:
       - "traefik.enable=true"
       # HTTPS
@@ -14,3 +13,7 @@ services:
       - "traefik.http.routers.s_webserv.tls.certresolver=letsencrypt-http"
       - "traefik.http.routers.s_webserv.rule=Host(`${TRAEFIK_HOST}.happi.yt`)"
       - "traefik.http.services.s_webserv.loadbalancer.server.port=80"
+
+networks:
+  frontend:
+    name: frontend
