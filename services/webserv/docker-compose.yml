@@ -12,5 +12,5 @@ services:
       - "traefik.http.routers.s_webserv.service=s_webserv"
       - "traefik.http.routers.s_webserv.entrypoints=https"
       - "traefik.http.routers.s_webserv.tls.certresolver=letsencrypt-http"
-      - "traefik.http.routers.s_webserv.rule=Host(`${TRAEFIK_HOST}`)"
+      - "traefik.http.routers.s_webserv.rule=Host(`${TRAEFIK_HOST}.happi.yt`)"
       - "traefik.http.services.s_webserv.loadbalancer.server.port=80"
