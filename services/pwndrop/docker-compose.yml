@@ -8,6 +8,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
+      - SECRET_PATH=${PATH}
     networks:
       - frontend
     volumes:
@@ -15,11 +16,24 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
+      # HTTPS
       - "traefik.http.routers.s_pwndrop.service=s_pwndrop"
       - "traefik.http.routers.s_pwndrop.entrypoints=https"
       - "traefik.http.routers.s_pwndrop.tls.certresolver=letsencrypt-http"
       - "traefik.http.routers.s_pwndrop.rule=Host(`${TRAEFIK_HOST}`)"
       - "traefik.http.services.s_pwndrop.loadbalancer.server.port=8080"
+      # CORS
+      - "traefik.http.middlewares.s_pwndrop.headers.accessControlAllowCredentials=true"
+      - "traefik.http.middlewares.s_pwndrop.headers.accessControlAllowOriginList=*"
+
+      # HTTP
+      - "traefik.http.routers.http_pwndrop.service=s_pwndrop"
+      - "traefik.http.routers.http_pwndrop.entrypoints=http"
+      - "traefik.http.routers.http_pwndrop.rule=Host(`${TRAEFIK_HOST}`)"
+      - "traefik.http.services.http_pwndrop.loadbalancer.server.port=8080"
+      # CORS
+      - "traefik.http.middlewares.http_pwndrop.headers.accessControlAllowCredentials=true"
+      - "traefik.http.middlewares.http_pwndrop.headers.accessControlAllowOriginList=*"
 
 networks:
   frontend:
