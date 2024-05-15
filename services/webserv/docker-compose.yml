@@ -2,9 +2,11 @@
 
 services:
   webserv:
-    context: ./docker
+    build:
+      context: ./docker
     restart: unless-stopped
-    networks: frontend
+    networks: 
+      - frontend
     labels:
       - "traefik.enable=true"
       # HTTPS
